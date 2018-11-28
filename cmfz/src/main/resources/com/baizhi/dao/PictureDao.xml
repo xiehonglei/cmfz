@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.PictureDao">
+    <select id="getAll" resultType="Picture">
+        select * from picture where status='展示' LIMIT #{start},#{pagesize}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*) from picture where status='展示'
+    </select>
+    <delete id="delete">
+        delete from picture where id=#{id}
+    </delete>
+    <insert id="add">
+        insert into picture values(0,#{title},#{imagePath},#{desc},'展示',now());
+    </insert>
+</mapper>

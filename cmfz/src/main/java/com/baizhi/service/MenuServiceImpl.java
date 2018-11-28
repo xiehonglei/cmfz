@@ -15,6 +15,7 @@ public class MenuServiceImpl implements MenuService {
     private MenuDao menuDao;
 
     @Override
+
     public Map getAll() {
         Map map = new HashMap();
         map.put("menulist", menuDao.getAll());

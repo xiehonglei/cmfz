@@ -9,6 +9,8 @@
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../js/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="../js/jquery.edatagrid.js"></script>
     <script type="text/javascript">
         <!--菜单处理-->
         $(function () {
@@ -19,20 +21,39 @@
                     // alert(list);
                     $.each(list, function (index, obj) {
                         var str = '';
-                        for (var value of obj.mlist) {
-                            str += '<image src="${pageContext.request.contextPath}/themes/icons/' + value.iconcls + '"/><a src="#" width="100%" height="100%">' + value.title + '</a><br/>'
-                        }
+                        $.each(obj.mlist, function (j, second) {
+                            str += "<p style='text-align: center'><a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" onclick=\"addTabs('" + second.title + "','" + second.url + "','" + second.iconcls + "')\" data-options=\"iconCls:'icon-" + second.iconcls + "'\">" + second.title + "</a></p>";
+                        });
 
                         $("#aa").accordion('add', {
-                                title: '<image src="${pageContext.request.contextPath}/themes/icons/' + obj.iconcls + '"/>' + obj.title,
+                            title: obj.title,
                                 content: str,
-                                selected: false
+                            selected: false,
+                            iconCls: 'icon-' + obj.iconcls
                             }
                         );
                     });
                 }
             });
         });
+
+        function addTabs(title, url, iconcls) {
+            var flag = $("#tt").tabs("exists", title);
+            if (flag) {
+                $("#tt").tabs("select", title);
+            } else {
+                /*添加选项卡*/
+                $('#tt').tabs('add', {
+                    title: title,
+                    selected: true,
+                    href: "${pageContext.request.contextPath}" + url,
+                    iconCls: iconcls,
+                    closable: true
+                });
+            }
+
+
+        }
     </script>
 
 </head>
