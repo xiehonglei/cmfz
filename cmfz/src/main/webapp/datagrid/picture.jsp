@@ -66,6 +66,7 @@
         iconCls: 'icon-',
         handler: function () {
             $("#dg").edatagrid("saveRow");
+            $("#dg").edatagrid("reload");
         }
     }];
 
@@ -74,6 +75,7 @@
         $('#dg').edatagrid({
             toolbar: toolbar,
             url: '${pageContext.request.contextPath}/getAllPicture',
+            updateUrl: '${pageContext.request.contextPath}/updatePicture',
             columns: [[
                 {field: 'title', title: '名字', width: 100},
                 {

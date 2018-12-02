@@ -28,8 +28,14 @@ public class PictureController {
     @RequestMapping("/updatePicture")
     public @ResponseBody
     boolean updatePicture(Picture picture) {
-        System.out.println(picture);
-        return false;
+        try {
+            System.out.println(picture);
+            pictureService.update(picture);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @RequestMapping("/deletePicture")

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.UserDao">
+    <select id="getOneWeekUser" resultType="int">
+        select count(*) from user where DATEDIFF(NOW(),date) &lt; 7
+    </select>
+    <select id="getTwoWeekUser" resultType="int">
+        select count(*) from user where DATEDIFF(NOW(),date) &lt; 14
+    </select>
+    <select id="getThreeWeekUser" resultType="int">
+        select count(*) from user where DATEDIFF(NOW(),date) &lt; 21
+    </select>
+    <select id="getManMap" resultType="UserDto">
+       select count(province) value ,province name from user where sex='男' group by province
+    </select>
+    <select id="getWomenMap" resultType="UserDto">
+       select count(province) value ,province name from user where sex='女' group by province
+    </select>
+    <select id="getAll" resultType="User">
+        select * from user limit #{start},#{pagesize}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*) from user
+    </select>
+    <select id="getUser" resultType="User">
+        select * from user
+    </select>
+
+    <insert id="add">
+        insert into user values
+        <foreach collection="list" separator="," item="user">
+            (0,#{user.phoneNum},#{user.username},#{user.password},#{user.salt},#{user.dharmalName},#{user.province},#{user.city},#{user.sex},#{user.sign},#{user.headPic},'正常',now())
+        </foreach>
+    </insert>
+</mapper>

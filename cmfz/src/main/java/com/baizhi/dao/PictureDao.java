@@ -13,4 +13,6 @@ public interface PictureDao {
     public void delete(int id);
 
     public void add(Picture picture);
+
+    public void update(Picture picture);
 }

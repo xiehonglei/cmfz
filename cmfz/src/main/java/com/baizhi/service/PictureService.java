@@ -10,4 +10,6 @@ public interface PictureService {
     public void delete(int id);
 
     public void add(Picture picture);
+
+    public void update(Picture picture);
 }
